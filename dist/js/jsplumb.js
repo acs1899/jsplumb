@@ -12804,7 +12804,7 @@
             _jsPlumb.draggable(params.el, opts);
         }
         if (params.droppable !== false) {
-            _jsPlumb.droppable(params.el, {
+            var dropOpts = {
                 drop:function(p) {
                     var el = p.drag.el;
                     if (el._isJsPlumbGroup) {
@@ -12819,9 +12819,12 @@
                         }
                         _jsPlumb.getGroupManager().addToGroup(self, el, false);
                     }
-
                 }
-            });
+            };
+            if (params.dropOptions) {
+                root.jsPlumb.extend(dropOpts, params.dropOptions);
+            }
+            _jsPlumb.droppable(params.el, dropOpts);
         }
         var _each = function(_el, fn) {
             var els = _el.nodeType == null ?  _el : [ _el ];
