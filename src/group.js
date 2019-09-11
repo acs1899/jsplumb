@@ -422,7 +422,7 @@
                     }
 
                     if (typeof dropCallback === 'function') {
-                        dropCallback(p)
+                        dropCallback(p);
                     }
                 }
             };
