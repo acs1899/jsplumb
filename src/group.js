@@ -420,12 +420,20 @@
                         }
                         _jsPlumb.getGroupManager().addToGroup(self, el, false);
                     }
+
+                    if (typeof dropCallback === 'function') {
+                        dropCallback(p)
+                    }
                 }
             };
             if (params.dropOptions) {
-                root.jsPlumb.extend(dropOpts, params.dropOptions);
+                var dropCallback = null;
+                dropCallback = params.dropOptions.drop;
+                root.jsPlumb.extend(params.dropOptions, dropOpts);
+                _jsPlumb.droppable(params.el, params.dropOptions);
+            } else {
+                _jsPlumb.droppable(params.el, dropOpts);
             }
-            _jsPlumb.droppable(params.el, dropOpts);
         }
         var _each = function(_el, fn) {
             var els = _el.nodeType == null ?  _el : [ _el ];
